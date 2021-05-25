@@ -1,0 +1,19 @@
+{
+  "name": "@vital-ai/haley-js-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vital-ai/haley-js-scripts.git"
+  },
+  "author": "Marc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vital-ai/haley-js-scripts/issues"
+  },
+  "homepage": "https://github.com/vital-ai/haley-js-scripts#readme"
+}
