@@ -3,7 +3,8 @@ const path = require('path');
 
 const RED = '\x1b[31m%s\x1b[0m';
 
-const VITAL_HOME_PATH = process.env.VITAL_HOME || path.join(__dirname, '../../../', '../vitalhome-harbordev');
+const VITAL_HOME_PATH = process.env.VITAL_HOME || path.join(__dirname, '../../../../', '../vitalhome-harbordev');
+const HALEY_DIR = process.env.npm_package_config_HALEY_DIR || '';
 
 const DOMAINS_PATH = path.join(VITAL_HOME_PATH, 'domain-json-schema');
 const DOMAINS_JSON_DATA_PATH = path.join(VITAL_HOME_PATH, 'domain-json-data');
@@ -18,7 +19,7 @@ if(!fs.existsSync(DOMAINS_JSON_DATA_PATH) || !fs.lstatSync(DOMAINS_JSON_DATA_PAT
     throw new Error(`${DOMAINS_JSON_DATA_PATH} does not exist`);
 }
 
-const COPY_TO_PATH = path.join(__dirname, '../../../', 'lib-vital');
+const COPY_TO_PATH = path.join(__dirname, '../../../../', HALEY_DIR, 'lib-vital');
 
 const FOLDERS_TO_BE_CREATED = [
     COPY_TO_PATH,
