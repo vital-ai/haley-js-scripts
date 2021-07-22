@@ -45,6 +45,14 @@ const copyFile = (sourcePath, destinationPath, file) => {
           throw err;
         }
 
+        let fileNameWithDashes = file.split('.')
+
+        if(fileNameWithDashes[1] === 'ndjson'){
+            let fileNameWithoutDashes = fileNameWithDashes[0].split('-').join('_');
+            let jsonObjects = data.split('\n').join(',\n');
+            data = `var ${fileNameWithoutDashes} = [${jsonObjects}]`;
+        }
+
         fs.writeFile(destinationPath, data, 'utf8', function (err) {
             if (err) {
                 console.log(RED, err);
