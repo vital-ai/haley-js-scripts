@@ -34,8 +34,10 @@ if (COPY_TO_FOLDER && !fs.existsSync(copyToFolder)){
 // copy the latest file.
 console.log(`Copying files to folder: ${copyToFolder}`);
 copyFromFiles.forEach(function(file) {
-    const sourcePath = path.join(__dirname, relativePathFromScriptToRoot, file);
-    const fileName = sourcePath.split('/').pop();
+    const fileParts = file.split('->');
+    const filePath = fileParts[0];
+    const sourcePath = path.join(__dirname, relativePathFromScriptToRoot, filePath);
+    const fileName = fileParts.length > 1 ? fileParts[1] : sourcePath.split('/').pop();
     const destinationPath = path.join(__dirname, relativePathFromScriptToRoot, COPY_TO_FOLDER, fileName);
 
     if(fs.existsSync(destinationPath)) {
