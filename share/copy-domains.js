@@ -3,8 +3,8 @@ const path = require('path');
 
 const RED = '\x1b[31m%s\x1b[0m';
 
-const VITAL_HOME_PATH = process.env.VITAL_HOME || path.join(__dirname, '../../../../', '../vitalhome-harbordev');
-const HALEY_DIR = process.env.npm_package_config_HALEY_DIR || '';
+const VITAL_HOME_PATH = process.env.VITAL_HOME || process.env.npm_config_VITAL_HOME || path.join(__dirname, '../../../../', '../vitalhome-harbordev');
+const HALEY_DIR = process.env.npm_package_config_HALEY_DIR || process.env.npm_config_HALEY_DIR || '';
 
 const DOMAINS_PATH = path.join(VITAL_HOME_PATH, 'domain-json-schema');
 const DOMAINS_JSON_DATA_PATH = path.join(VITAL_HOME_PATH, 'domain-json-data');

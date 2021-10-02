@@ -2,9 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const RED = '\x1b[31m%s\x1b[0m';
-const WEBROOT_DIR = process.env.npm_package_config_WEBROOT_DIR;
+const WEBROOT_DIR = process.env.npm_package_config_WEBROOT_DIR || process.env.npm_config_WEBROOT_DIR;
+const INSTALL_PATH_TO_PROJECT_FOLDER = process.env.npm_package_config_INSTALL_PATH_TO_PROJECT_FOLDER || process.env.npm_config_INSTALL_PATH_TO_PROJECT_FOLDER || '../../../../';
 
-const webrootAbsolute = path.join(__dirname, '../../../../', WEBROOT_DIR);
+const webrootAbsolute = path.join(__dirname, INSTALL_PATH_TO_PROJECT_FOLDER, WEBROOT_DIR);
 if (!fs.existsSync(webrootAbsolute)){
     console.error(RED, `Directory ${webrootAbsolute} does not exist`);
     console.error(RED, `Might be issue with the config of WEBROOT_DIR in package.json`);
@@ -40,7 +41,7 @@ const FILES_TO_BE_COPIED = [
 
 console.log('Creating Neccessary Folder');
 FOLDERS_TO_BE_CREATED.forEach(function(dir) {
-    const absoluteDir = path.join(__dirname, '../../../../', dir);
+    const absoluteDir = path.join(__dirname, INSTALL_PATH_TO_PROJECT_FOLDER, dir);
     if (!fs.existsSync(absoluteDir)){
         fs.mkdirSync(absoluteDir);
         console.log(`created directory: ${absoluteDir}`);
@@ -52,7 +53,7 @@ FOLDERS_TO_BE_CREATED.forEach(function(dir) {
 // remove file.
 console.log(`Removing files from folder: ${COPY_TO_PATH}`);
 FILES_TO_BE_COPIED.forEach(function(file) {
-    const destinationPath = path.join(__dirname, '../../../../', COPY_TO_PATH, file);
+    const destinationPath = path.join(__dirname, INSTALL_PATH_TO_PROJECT_FOLDER, COPY_TO_PATH, file);
     if(fs.existsSync(destinationPath)) {
         fs.unlink(destinationPath, function (err) {            
             if (err) {                                                 
@@ -66,8 +67,8 @@ FILES_TO_BE_COPIED.forEach(function(file) {
 // copy the latest file.
 console.log(`Copying files to folder: ${COPY_TO_PATH}`);
 FILES_TO_BE_COPIED.forEach(function(file) {
-    const sourcePath = path.join(__dirname, '../../haley-js-browser', file);
-    const destinationPath = path.join(__dirname, '../../../../', COPY_TO_PATH, file);
+    const sourcePath = path.join(__dirname, '../', file);
+    const destinationPath = path.join(__dirname, INSTALL_PATH_TO_PROJECT_FOLDER, COPY_TO_PATH, file);
     fs.readFile(sourcePath, 'utf8', function (err,data) {
         if (err) {
           console.log(RED, err)
@@ -88,7 +89,7 @@ FILES_TO_BE_COPIED.forEach(function(file) {
 
 console.log('Record the time when Vital installed');
 const text = `TIME_VITAL_INSTALLED = "${new Date()}"`;
-const OUTPUT_DOMAINS_PATH = path.join(__dirname, '../../../../', COPY_TO_PATH, 'created-time.js');
+const OUTPUT_DOMAINS_PATH = path.join(__dirname, INSTALL_PATH_TO_PROJECT_FOLDER, COPY_TO_PATH, 'created-time.js');
 fs.writeFile(OUTPUT_DOMAINS_PATH, text, {flag: 'w+'}, function (err) {
     if(err) {
         console.error(RED, err);
