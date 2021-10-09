@@ -3,9 +3,9 @@ const path = require('path');
 
 const RED = '\x1b[31m%s\x1b[0m';
 
-const INSTALL_PATH_TO_PROJECT_FOLDER = process.env.npm_config_INSTALL_PATH_TO_PROJECT_FOLDER || '../../../../';
-const HALEY_DIR = process.env.npm_package_config_HALEY_DIR || process.env.npm_config_HALEY_DIR || '';
-const COPY_DOMAINS_TO_FOLDER = process.env.npm_config_COPY_DOMAINS_TO_FOLDER;
+const INSTALL_PATH_TO_PROJECT_FOLDER = process.env.npm_config_install_path_to_project_folder || '../../../../';
+const HALEY_DIR = process.env.npm_package_config_HALEY_DIR || process.env.npm_config_haley_dir|| '';
+const COPY_DOMAINS_TO_FOLDER = process.env.npm_config_copy_domains_to_folder;
 
 // if COPY_DOMAINS_TO_FOLDER is not set, then the domains will be copied to lib-vital/vitalservice;
 let FOLDERS_TO_BE_CLEAN;
